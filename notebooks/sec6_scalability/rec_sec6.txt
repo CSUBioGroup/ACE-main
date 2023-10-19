@@ -1,0 +1,312 @@
+Reading `mtx` files...
+=======> preprocessing
+gex_all.max =  3195.0
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+	Completed 4 / 10 iteration(s).
+	Completed 5 / 10 iteration(s).
+Reach convergence after 5 iteration(s).
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+Reach convergence after 3 iteration(s).
+batch0: ['rna', 'adt']
+batch1: ['rna']
+batch2: ['adt']
+Batch ids used in training:  [0]
+Training stage1
+Epoch 3, loss=7.1390, temp=10.0000, batch0 loss=7.1390, 
+Epoch 7, loss=6.1746, temp=10.0000, batch0 loss=6.1746, 
+Epoch 11, loss=5.7564, temp=10.0000, batch0 loss=5.7564, 
+Epoch 15, loss=5.5950, temp=10.0000, batch0 loss=5.5950, 
+Epoch 19, loss=5.4678, temp=10.0000, batch0 loss=5.4678, 
+Epoch 23, loss=5.3247, temp=10.0000, batch0 loss=5.3247, 
+Epoch 27, loss=5.2324, temp=10.0000, batch0 loss=5.2324, 
+Epoch 31, loss=5.1364, temp=10.0000, batch0 loss=5.1364, 
+Epoch 35, loss=5.0608, temp=10.0000, batch0 loss=5.0608, 
+Epoch 39, loss=4.9334, temp=10.0000, batch0 loss=4.9334, 
+Epoch 43, loss=4.8728, temp=10.0000, batch0 loss=4.8728, 
+Epoch 47, loss=4.7810, temp=10.0000, batch0 loss=4.7810, 
+Epoch 51, loss=4.7303, temp=10.0000, batch0 loss=4.7303, 
+Epoch 55, loss=4.6481, temp=10.0000, batch0 loss=4.6481, 
+Epoch 59, loss=4.5698, temp=10.0000, batch0 loss=4.5698, 
+Epoch 63, loss=4.4909, temp=10.0000, batch0 loss=4.4909, 
+Epoch 67, loss=4.4351, temp=10.0000, batch0 loss=4.4351, 
+Epoch 71, loss=4.3356, temp=10.0000, batch0 loss=4.3356, 
+Epoch 75, loss=4.2757, temp=10.0000, batch0 loss=4.2757, 
+Epoch 79, loss=4.1792, temp=10.0000, batch0 loss=4.1792, 
+Training stage2
+Epoch 0, rna-loss=0.4270, adt-loss=1.0609, 
+Epoch 1, rna-loss=0.0991, adt-loss=0.4788, 
+Epoch 3, rna-loss=0.0869, adt-loss=0.1107, 
+Epoch 5, rna-loss=0.0751, adt-loss=0.1709, 
+Epoch 7, rna-loss=0.0626, adt-loss=0.0789, 
+Epoch 9, rna-loss=0.0538, adt-loss=0.0622, 
+==========================
+rate=0.01
+Time cost:  57.563823
+==========================
+=======> preprocessing
+gex_all.max =  6710.0
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+	Completed 4 / 10 iteration(s).
+	Completed 5 / 10 iteration(s).
+Reach convergence after 5 iteration(s).
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+Reach convergence after 3 iteration(s).
+batch0: ['rna', 'adt']
+batch1: ['rna']
+batch2: ['adt']
+Batch ids used in training:  [0]
+Training stage1
+Epoch 3, loss=5.2071, temp=10.0000, batch0 loss=5.2071, 
+Epoch 7, loss=4.6689, temp=10.0000, batch0 loss=4.6689, 
+Epoch 11, loss=4.3271, temp=10.0000, batch0 loss=4.3271, 
+Epoch 15, loss=4.1281, temp=10.0000, batch0 loss=4.1281, 
+Epoch 19, loss=4.0039, temp=10.0000, batch0 loss=4.0039, 
+Epoch 23, loss=3.9329, temp=10.0000, batch0 loss=3.9329, 
+Epoch 27, loss=3.8741, temp=10.0000, batch0 loss=3.8741, 
+Epoch 31, loss=3.8062, temp=10.0000, batch0 loss=3.8062, 
+Epoch 35, loss=3.7552, temp=10.0000, batch0 loss=3.7552, 
+Epoch 39, loss=3.7144, temp=10.0000, batch0 loss=3.7144, 
+Epoch 43, loss=3.6737, temp=10.0000, batch0 loss=3.6737, 
+Epoch 47, loss=3.6195, temp=10.0000, batch0 loss=3.6195, 
+Epoch 51, loss=3.6003, temp=10.0000, batch0 loss=3.6003, 
+Epoch 55, loss=3.5627, temp=10.0000, batch0 loss=3.5627, 
+Epoch 59, loss=3.5277, temp=10.0000, batch0 loss=3.5277, 
+Epoch 63, loss=3.4852, temp=10.0000, batch0 loss=3.4852, 
+Epoch 67, loss=3.4751, temp=10.0000, batch0 loss=3.4751, 
+Epoch 71, loss=3.4417, temp=10.0000, batch0 loss=3.4417, 
+Epoch 75, loss=3.4288, temp=10.0000, batch0 loss=3.4288, 
+Epoch 79, loss=3.3885, temp=10.0000, batch0 loss=3.3885, 
+Training stage2
+Epoch 0, rna-loss=0.2554, adt-loss=0.4820, 
+Epoch 1, rna-loss=0.0945, adt-loss=0.1217, 
+Epoch 3, rna-loss=0.0698, adt-loss=0.0703, 
+Epoch 5, rna-loss=0.0665, adt-loss=0.0656, 
+Epoch 7, rna-loss=0.0654, adt-loss=0.0649, 
+Epoch 9, rna-loss=0.0647, adt-loss=0.0642, 
+==========================
+rate=0.1
+Time cost:  57.661362
+==========================
+=======> preprocessing
+gex_all.max =  6935.0
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+	Completed 4 / 10 iteration(s).
+	Completed 5 / 10 iteration(s).
+Reach convergence after 5 iteration(s).
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+Reach convergence after 3 iteration(s).
+batch0: ['rna', 'adt']
+batch1: ['rna']
+batch2: ['adt']
+Batch ids used in training:  [0]
+Training stage1
+Epoch 3, loss=4.6803, temp=10.0000, batch0 loss=4.6803, 
+Epoch 7, loss=4.1837, temp=10.0000, batch0 loss=4.1837, 
+Epoch 11, loss=4.0190, temp=10.0000, batch0 loss=4.0190, 
+Epoch 15, loss=3.9072, temp=10.0000, batch0 loss=3.9072, 
+Epoch 19, loss=3.8391, temp=10.0000, batch0 loss=3.8391, 
+Epoch 23, loss=3.7788, temp=10.0000, batch0 loss=3.7788, 
+Epoch 27, loss=3.7443, temp=10.0000, batch0 loss=3.7443, 
+Epoch 31, loss=3.6996, temp=10.0000, batch0 loss=3.6996, 
+Epoch 35, loss=3.6634, temp=10.0000, batch0 loss=3.6634, 
+Epoch 39, loss=3.6253, temp=10.0000, batch0 loss=3.6253, 
+Epoch 43, loss=3.6032, temp=10.0000, batch0 loss=3.6032, 
+Epoch 47, loss=3.5753, temp=10.0000, batch0 loss=3.5753, 
+Epoch 51, loss=3.5432, temp=10.0000, batch0 loss=3.5432, 
+Epoch 55, loss=3.5291, temp=10.0000, batch0 loss=3.5291, 
+Epoch 59, loss=3.5003, temp=10.0000, batch0 loss=3.5003, 
+Epoch 63, loss=3.4757, temp=10.0000, batch0 loss=3.4757, 
+Epoch 67, loss=3.4477, temp=10.0000, batch0 loss=3.4477, 
+Epoch 71, loss=3.4223, temp=10.0000, batch0 loss=3.4223, 
+Epoch 75, loss=3.4074, temp=10.0000, batch0 loss=3.4074, 
+Epoch 79, loss=3.3898, temp=10.0000, batch0 loss=3.3898, 
+Training stage2
+Epoch 0, rna-loss=0.1914, adt-loss=0.3333, 
+Epoch 1, rna-loss=0.0800, adt-loss=0.0826, 
+Epoch 3, rna-loss=0.0718, adt-loss=0.0708, 
+Epoch 5, rna-loss=0.0700, adt-loss=0.0700, 
+Epoch 7, rna-loss=0.0692, adt-loss=0.0693, 
+Epoch 9, rna-loss=0.0685, adt-loss=0.0696, 
+==========================
+rate=0.2
+Time cost:  116.881744
+==========================
+=======> preprocessing
+gex_all.max =  8311.0
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+	Completed 4 / 10 iteration(s).
+	Completed 5 / 10 iteration(s).
+Reach convergence after 5 iteration(s).
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+Reach convergence after 3 iteration(s).
+batch0: ['rna', 'adt']
+batch1: ['rna']
+batch2: ['adt']
+Batch ids used in training:  [0]
+Training stage1
+Epoch 3, loss=4.2487, temp=10.0000, batch0 loss=4.2487, 
+Epoch 7, loss=3.9928, temp=10.0000, batch0 loss=3.9928, 
+Epoch 11, loss=3.8821, temp=10.0000, batch0 loss=3.8821, 
+Epoch 15, loss=3.8216, temp=10.0000, batch0 loss=3.8216, 
+Epoch 19, loss=3.7683, temp=10.0000, batch0 loss=3.7683, 
+Epoch 23, loss=3.7282, temp=10.0000, batch0 loss=3.7282, 
+Epoch 27, loss=3.7008, temp=10.0000, batch0 loss=3.7008, 
+Epoch 31, loss=3.6609, temp=10.0000, batch0 loss=3.6609, 
+Epoch 35, loss=3.6315, temp=10.0000, batch0 loss=3.6315, 
+Epoch 39, loss=3.6012, temp=10.0000, batch0 loss=3.6012, 
+Epoch 43, loss=3.5834, temp=10.0000, batch0 loss=3.5834, 
+Epoch 47, loss=3.5586, temp=10.0000, batch0 loss=3.5586, 
+Epoch 51, loss=3.5303, temp=10.0000, batch0 loss=3.5303, 
+Epoch 55, loss=3.5087, temp=10.0000, batch0 loss=3.5087, 
+Epoch 59, loss=3.4790, temp=10.0000, batch0 loss=3.4790, 
+Epoch 63, loss=3.4510, temp=10.0000, batch0 loss=3.4510, 
+Epoch 67, loss=3.4362, temp=10.0000, batch0 loss=3.4362, 
+Epoch 71, loss=3.4119, temp=10.0000, batch0 loss=3.4119, 
+Epoch 75, loss=3.3890, temp=10.0000, batch0 loss=3.3890, 
+Epoch 79, loss=3.3725, temp=10.0000, batch0 loss=3.3725, 
+Training stage2
+Epoch 0, rna-loss=0.1358, adt-loss=0.2085, 
+Epoch 1, rna-loss=0.0727, adt-loss=0.0718, 
+Epoch 3, rna-loss=0.0694, adt-loss=0.0695, 
+Epoch 5, rna-loss=0.0680, adt-loss=0.0688, 
+Epoch 7, rna-loss=0.0672, adt-loss=0.0691, 
+Epoch 9, rna-loss=0.0666, adt-loss=0.0685, 
+==========================
+rate=0.4
+Time cost:  83.838614
+==========================
+=======> preprocessing
+gex_all.max =  7938.0
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+	Completed 4 / 10 iteration(s).
+Reach convergence after 4 iteration(s).
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+Reach convergence after 3 iteration(s).
+batch0: ['rna', 'adt']
+batch1: ['rna']
+batch2: ['adt']
+Batch ids used in training:  [0]
+Training stage1
+Epoch 3, loss=4.0428, temp=10.0000, batch0 loss=4.0428, 
+Epoch 7, loss=3.8676, temp=10.0000, batch0 loss=3.8676, 
+Epoch 11, loss=3.7892, temp=10.0000, batch0 loss=3.7892, 
+Epoch 15, loss=3.7262, temp=10.0000, batch0 loss=3.7262, 
+Epoch 19, loss=3.6865, temp=10.0000, batch0 loss=3.6865, 
+Epoch 23, loss=3.6422, temp=10.0000, batch0 loss=3.6422, 
+Epoch 27, loss=3.6010, temp=10.0000, batch0 loss=3.6010, 
+Epoch 31, loss=3.5670, temp=10.0000, batch0 loss=3.5670, 
+Epoch 35, loss=3.5285, temp=10.0000, batch0 loss=3.5285, 
+Epoch 39, loss=3.4962, temp=10.0000, batch0 loss=3.4962, 
+Epoch 43, loss=3.4667, temp=10.0000, batch0 loss=3.4667, 
+Epoch 47, loss=3.4317, temp=10.0000, batch0 loss=3.4317, 
+Epoch 51, loss=3.4044, temp=10.0000, batch0 loss=3.4044, 
+Epoch 55, loss=3.3763, temp=10.0000, batch0 loss=3.3763, 
+Epoch 59, loss=3.3512, temp=10.0000, batch0 loss=3.3512, 
+Epoch 63, loss=3.3304, temp=10.0000, batch0 loss=3.3304, 
+Epoch 67, loss=3.3055, temp=10.0000, batch0 loss=3.3055, 
+Epoch 71, loss=3.2781, temp=10.0000, batch0 loss=3.2781, 
+Epoch 75, loss=3.2577, temp=10.0000, batch0 loss=3.2577, 
+Epoch 79, loss=3.2392, temp=10.0000, batch0 loss=3.2392, 
+Training stage2
+Epoch 0, rna-loss=0.1074, adt-loss=0.1432, 
+Epoch 1, rna-loss=0.0716, adt-loss=0.0715, 
+Epoch 3, rna-loss=0.0691, adt-loss=0.0701, 
+Epoch 5, rna-loss=0.0678, adt-loss=0.0700, 
+Epoch 7, rna-loss=0.0671, adt-loss=0.0694, 
+Epoch 9, rna-loss=0.0666, adt-loss=0.0692, 
+==========================
+rate=0.8
+Time cost:  122.316933
+==========================
+=======> preprocessing
+gex_all.max =  8513.0
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+	Completed 4 / 10 iteration(s).
+	Completed 5 / 10 iteration(s).
+Reach convergence after 5 iteration(s).
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+Reach convergence after 3 iteration(s).
+batch0: ['rna', 'adt']
+batch1: ['rna']
+batch2: ['adt']
+Batch ids used in training:  [0]
+Training stage1
+Epoch 3, loss=3.9938, temp=10.0000, batch0 loss=3.9938, 
+Epoch 7, loss=3.8351, temp=10.0000, batch0 loss=3.8351, 
+Epoch 11, loss=3.7581, temp=10.0000, batch0 loss=3.7581, 
+Epoch 15, loss=3.7003, temp=10.0000, batch0 loss=3.7003, 
+Epoch 19, loss=3.6501, temp=10.0000, batch0 loss=3.6501, 
+Epoch 23, loss=3.6072, temp=10.0000, batch0 loss=3.6072, 
+Epoch 27, loss=3.5652, temp=10.0000, batch0 loss=3.5652, 
+Epoch 31, loss=3.5254, temp=10.0000, batch0 loss=3.5254, 
+Epoch 35, loss=3.4853, temp=10.0000, batch0 loss=3.4853, 
+Epoch 39, loss=3.4495, temp=10.0000, batch0 loss=3.4495, 
+Epoch 43, loss=3.4192, temp=10.0000, batch0 loss=3.4192, 
+Epoch 47, loss=3.3886, temp=10.0000, batch0 loss=3.3886, 
+Epoch 51, loss=3.3590, temp=10.0000, batch0 loss=3.3590, 
+Epoch 55, loss=3.3330, temp=10.0000, batch0 loss=3.3330, 
+Epoch 59, loss=3.3053, temp=10.0000, batch0 loss=3.3053, 
+Epoch 63, loss=3.2811, temp=10.0000, batch0 loss=3.2811, 
+Epoch 67, loss=3.2589, temp=10.0000, batch0 loss=3.2589, 
+Epoch 71, loss=3.2350, temp=10.0000, batch0 loss=3.2350, 
+Epoch 75, loss=3.2124, temp=10.0000, batch0 loss=3.2124, 
+Epoch 79, loss=3.1937, temp=10.0000, batch0 loss=3.1937, 
+Training stage2
+Epoch 0, rna-loss=0.1011, adt-loss=0.1304, 
+Epoch 1, rna-loss=0.0718, adt-loss=0.0719, 
+Epoch 3, rna-loss=0.0693, adt-loss=0.0708, 
+Epoch 5, rna-loss=0.0682, adt-loss=0.0703, 
+Epoch 7, rna-loss=0.0675, adt-loss=0.0700, 
+Epoch 9, rna-loss=0.0672, adt-loss=0.0698, 
+==========================
+rate=1.0
+Time cost:  137.944141
+==========================

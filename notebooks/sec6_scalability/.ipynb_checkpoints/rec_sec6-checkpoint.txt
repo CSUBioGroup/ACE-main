@@ -1,0 +1,40 @@
+Reading `mtx` files...
+=======> preprocessing
+gex_all.max =  3195.0
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+	Completed 4 / 10 iteration(s).
+	Completed 5 / 10 iteration(s).
+Reach convergence after 5 iteration(s).
+Use GPU mode.
+	Initialization is completed.
+	Completed 1 / 10 iteration(s).
+	Completed 2 / 10 iteration(s).
+	Completed 3 / 10 iteration(s).
+Reach convergence after 3 iteration(s).
+batch0: ['rna', 'adt']
+batch1: ['rna']
+batch2: ['adt']
+Batch ids used in training:  [0]
+Training stage1
+Epoch 3, loss=7.1390, temp=10.0000, batch0 loss=7.1390, 
+Epoch 7, loss=6.1746, temp=10.0000, batch0 loss=6.1746, 
+Epoch 11, loss=5.7564, temp=10.0000, batch0 loss=5.7564, 
+Epoch 15, loss=5.5950, temp=10.0000, batch0 loss=5.5950, 
+Epoch 19, loss=5.4678, temp=10.0000, batch0 loss=5.4678, 
+Epoch 23, loss=5.3247, temp=10.0000, batch0 loss=5.3247, 
+Epoch 27, loss=5.2324, temp=10.0000, batch0 loss=5.2324, 
+Epoch 31, loss=5.1364, temp=10.0000, batch0 loss=5.1364, 
+Epoch 35, loss=5.0608, temp=10.0000, batch0 loss=5.0608, 
+Epoch 39, loss=4.9334, temp=10.0000, batch0 loss=4.9334, 
+Epoch 43, loss=4.8728, temp=10.0000, batch0 loss=4.8728, 
+Epoch 47, loss=4.7810, temp=10.0000, batch0 loss=4.7810, 
+Epoch 51, loss=4.7303, temp=10.0000, batch0 loss=4.7303, 
+Epoch 55, loss=4.6481, temp=10.0000, batch0 loss=4.6481, 
+Epoch 59, loss=4.5698, temp=10.0000, batch0 loss=4.5698, 
+Epoch 63, loss=4.4909, temp=10.0000, batch0 loss=4.4909, 
+Epoch 67, loss=4.4351, temp=10.0000, batch0 loss=4.4351, 
+Epoch 71, loss=4.3356, temp=10.0000, batch0 loss=4.3356, 

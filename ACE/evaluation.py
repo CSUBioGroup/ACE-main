@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd
 import scanpy as sc
-from src.nmiari import nmi, ari
-from src.clustering import opt_louvain
-from src.matching import eval_FOSCTTM, eval_ACC, eval_matching_score
-from src.matching import eval_FOSCTTM_above2, eval_matching_score_above2
+from ACE.nmiari import nmi, ari
+from ACE.clustering import opt_louvain
+from ACE.matching import eval_FOSCTTM, eval_ACC, eval_matching_score
+from ACE.matching import eval_FOSCTTM_above2, eval_matching_score_above2
 from datetime import datetime
 from scipy.sparse.csgraph import connected_components
 from sklearn.metrics.cluster import silhouette_samples, silhouette_score

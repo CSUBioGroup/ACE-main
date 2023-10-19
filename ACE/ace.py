@@ -23,11 +23,11 @@ import torch.utils.data.dataloader as dataloader
 import torch.optim as optim
 import torch.nn.functional as F
 
-from src.networks import Encoder, AlignNet
-from src.datasets import BaseDataset, NModalDataset
-from src.loss import Npos_NCE
-# from src.utils import save_model, load_model, stage1_fit_perStep, stage2_fit_perStep
-import src.utils as utls
+from ACE.networks import Encoder, AlignNet
+from ACE.datasets import BaseDataset, NModalDataset
+from ACE.loss import Npos_NCE
+# from ACE.utils import save_model, load_model, stage1_fit_perStep, stage2_fit_perStep
+import ACE.utils as utls
 
 class ACE(object):
     def __init__(

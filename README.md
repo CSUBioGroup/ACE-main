@@ -99,6 +99,11 @@ model.stage1_fit(  # training
 )
 
 # stage1 inference
+# ad_integ is a anndata object containing the embeddings of each batch in ad_integ.X
+# ad_integ.obs will inherit .obs from each batch
+# it will also automatically obtain 'batch' and 'domain' labels, for example,
+# ad_integ.obs['batch']: ['batch1', 'batch1', ..., 'batch2', ..., 'batch3', ...]
+# ad_integ.obs['domain']: ['rna+adt', 'rna+adt', ..., 'rna', ..., 'adt', ...]
 ad_integ = model.stage1_infer(
     modBatch_dict, useReps_dict, output_key='stage1_emb', 
     specify_mods_perBatch=[['rna'], ['rna'], ['adt']]
@@ -129,6 +134,7 @@ model.stage2_fit(
 )
 
 # the inputs are the same as above
+# the output ad_integ2 is similar as above
 ad_integ2 = model.stage2_infer(
     modBatch_dict, useReps_dict, output_key1='stage1_emb', output_key2='stage2_emb', 
     knn=2, mod_weights={'rna':0.5, 'adt':0.5}

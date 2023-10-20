@@ -22,7 +22,7 @@ install other dependencies
 
 `pip install -r requirements.txt`
 
-Note that after installing `scib`, remember to compile using `g++ -std=c++11 -O3 knn_graph.cpp -o knn_graph.o` [scib-issue](https://github.com/theislab/scib/issues/375).
+Note that after installing `scib`, remember to compile using `g++ -std=c++11 -O3 knn_graph.cpp -o knn_graph.o` ([scib-issue](https://github.com/theislab/scib/issues/375)).
 
 setup
 
@@ -33,23 +33,28 @@ All datasets used in our paper can be found in [`zenodo`](). We provided the dat
 
 ## Tutorials
 In the [`notebooks`](./notebooks) folder, we provided notebooks to reproduce ACE's results in our manuscript.
-[`sec1_sec2_integration`](./notebooks/sec1_sec2_integration) reproduced ACE's results in bimodal and trimodal integration benchmark.
-[`sec3_imputation`](./notebooks/sec3_imputation) reproduced results in feature imputation. 
-[`sec4_CITE-ASAP_refinement`](./notebooks/sec4_CITE-ASAP_refinement) reproduced experiments of annotation refinement analysis on CITE-ASAP dataset. 
-[`sec5_COVID-19`] reproduced experiments on COVID-19 related datasets.
-[`sec6_scalability`] tested ACE's time consumption. 
 
-## Usage of integration
+[`sec1_sec2_integration`](./notebooks/sec1_sec2_integration) reproduced ACE's results in bimodal and trimodal integration benchmark.
+
+[`sec3_imputation`](./notebooks/sec3_imputation) reproduced results in feature imputation. 
+
+[`sec4_CITE-ASAP_refinement`](./notebooks/sec4_CITE-ASAP_refinement) reproduced experiments of annotation refinement analysis on CITE-ASAP dataset. 
+
+[`sec5_COVID-19`](./notebooks/sec5_COVID-19) reproduced experiments on COVID-19 related datasets.
+
+[`sec6_scalability`](./notebooks/sec6_scalability) tested ACE's time consumption. 
+
+## Usage
 Input format
 
-For example, suppose that there are three batches to be integrated and they are measured within two modalities: RNA and adt(protein). Batch1 is measured with RNA and protein, batch2 measured with RNA only, and batch3 measured with protein only. These batches should be saved in a dictionary
+For example, suppose that there are three batches to be integrated and they are measured within two modalities: RNA and adt (protein). Batch1 is measured with RNA and protein, batch2 measured with RNA only, and batch3 measured with protein only. These batches should be saved in a dictionary
 ```Python
 modBatch_dict = {
     'rna': [batch1_rna, batch2_rna, None],
     'adt': [batch1_adt, None, batch3_adt] 
 }
 ```
-`Keys`: 'rna' and 'adt' (or any other name) denote the modalities. Each key corresponds to a list of anndata objects which saves each batch's data from modality 'key' (rna or adt). Elements in the lists are in the same order of batches. `None` indicates the modality is not profiled in this batch. 
+Keys 'rna' and 'adt' (or any other name) denote the modalities. Each key corresponds to a list of anndata objects which saves each batch's data from modality 'key' (rna or adt). Elements in the lists are in the same order of batches. `None` indicates the modality is not profiled in this batch. 
 
 Another dictionary is used to specify where the input data is saved in the anndata object:
 ```Python
@@ -100,7 +105,18 @@ ad_integ = model.stage1_infer(
 )
 ```
 
-`specify_mods_perBatch` is a important parameter for stage1, which specifies which modalities are used for each batch to generate its embedding. In the example, we used batch 1's rna modality to generate its embedding. Batch 2 used rna and batch 3 used adt. We can also specify `['adt']`, `['rna', 'adt']`, or `['all']` for batch 1. `['rna', 'adt']` and `['all']` mean using all the modalities contained in batch 1 to generate its embedding. In most scenarios of mosaic integration, we only specify one modality for each batch, because it can help balance batch correction and preservation of cellular heterogeneity. 
+`specify_mods_perBatch` is a important parameter for stage1, which specifies which modalities are used for each batch to generate its embedding. In the example, we used batch1's rna modality to generate its embedding. Batch2 used rna and batch3 used adt. We can also specify `['adt']`, `['rna', 'adt']`, or `['all']` for batch 1. `['rna', 'adt']` and `['all']` mean using all the modalities contained in batch 1 to generate its embedding. In most scenarios of mosaic integration, we only specify one modality for each batch, because it can help balance batch correction and preservation of cellular heterogeneity. 
+
+For feature imputation
+```Python
+# after stage1 training and inference
+imputed_data = model.impute(modBatch_dict, output_key1='stage1_emb', knn=10, verbose=True)
+
+# imputed_data is a dictionary like modBatch_dict, but its value is list of array
+# e.g., {'rna':[rna_array1, rna_array2, rna_array3], 'adt':[adt_array1, adt_array2, adt_array3]}
+batch2_adt_imputed = imputed_data['adt'][1]  # array 
+batch3_rna_imputed = imputed_data['rna'][2]  # array
+```
 
 #### Stage 2
 ```Python
@@ -119,4 +135,4 @@ ad_integ2 = model.stage2_infer(
 )
 ```
 
-`knn` denotes the number of k-nearest neighbors used during performing cross-modal matching-based imputation. We set `knn=2` in most cases. `mod_weights` denotes the weight of each modality during averaging representations from all modalities. 
+`knn` denotes the number of k-nearest neighbors used during performing cross-modal matching-based imputation. We set `knn=2` in most integration cases. `mod_weights` denotes the weight of each modality during averaging representations from all modalities. 

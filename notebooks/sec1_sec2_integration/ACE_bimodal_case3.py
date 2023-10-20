@@ -9,9 +9,9 @@ import sys
 import math
 from os.path import join
 
-sys.path.insert(0, '../..')
-from src.ace import ACE
-from src.evaluation import eval_clustering, eval_lisi, eval_bridge, eval_bridge_above2
+# sys.path.insert(0, '../..')
+from ACE.ace import ACE
+from ACE.evaluation import eval_clustering, eval_lisi, eval_bridge, eval_bridge_above2
 
 # Path to the data directory
 # root_dir = '../../BM-CITE'

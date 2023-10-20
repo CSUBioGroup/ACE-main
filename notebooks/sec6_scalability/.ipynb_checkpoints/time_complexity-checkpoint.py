@@ -12,10 +12,10 @@ import h5py
 import datetime
 from os.path import join
 
-sys.path.insert(0, '../..')
-from src.ace import ACE
-from src.preprocessing import lsiTransformer, ADTransformer, HARMONY
-from src.evaluation import eval_clustering, eval_lisi, eval_bridge, eval_bridge_above2
+# sys.path.insert(0, '../..')
+from ACE.ace import ACE
+from ACE.preprocessing import lsiTransformer, ADTransformer, HARMONY
+from ACE.evaluation import eval_clustering, eval_lisi, eval_bridge, eval_bridge_above2
 
 print('Reading `mtx` files...')
 _path = '../../data/COVID-19/Bridge/cite.h5'

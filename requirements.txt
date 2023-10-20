@@ -13,3 +13,4 @@ fbpca
 scib==1.1.4
 harmony-pytorch==0.1.7
 matplotlib==3.6.0
+louvain==0.8.0

@@ -11,11 +11,11 @@ import gc
 import h5py
 from os.path import join
 
-sys.path.insert(0, '../..')
-from src.ace import ACE
-import src.utils as utls
-from src.preprocessing import lsiTransformer, ADTransformer, HARMONY
-from src.evaluation import eval_clustering, eval_lisi, eval_bridge, eval_bridge_above2
+# sys.path.insert(0, '../..')
+from ACE.ace import ACE
+import ACE.utils as utls
+from ACE.preprocessing import lsiTransformer, ADTransformer, HARMONY
+from ACE.evaluation import eval_clustering, eval_lisi, eval_bridge, eval_bridge_above2
 
 def get_matrix(h5seurat_path, matrix): 
     f = h5py.File(h5seurat_path, 'r')

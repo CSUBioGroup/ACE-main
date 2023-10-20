@@ -24,3 +24,9 @@
 5. setup
 
 `python setup.py install`
+
+# scib lisi bug:
+graph_lisi_indices_0 not found
+
+https://github.com/theislab/scib/issues/375
+g++ -std=c++11 -O3 knn_graph.cpp -o knn_graph.o

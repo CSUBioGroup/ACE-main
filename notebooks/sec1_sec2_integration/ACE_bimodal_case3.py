@@ -15,7 +15,7 @@ from ACE.evaluation import eval_clustering, eval_lisi, eval_bridge, eval_bridge_
 
 # Path to the data directory
 # root_dir = '../../BM-CITE'
-data_dir = '../../BM-CITE'
+data_dir = '../../data/BM-CITE'
 
 print('Reading `mtx` files...')
 rna_norm_mat = sps.csr_matrix(sio.mmread(join(data_dir, 'rna_mat_norm.mtx')).T)

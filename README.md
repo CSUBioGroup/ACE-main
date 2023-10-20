@@ -133,8 +133,8 @@ model.stage2_fit(
     obvious_be=True,
 )
 
-# the inputs are the same as above
-# the output ad_integ2 is similar as above
+# the inputs are the same as stage 1
+# the format of ad_integ2 is similar as stage 1
 ad_integ2 = model.stage2_infer(
     modBatch_dict, useReps_dict, output_key1='stage1_emb', output_key2='stage2_emb', 
     knn=2, mod_weights={'rna':0.5, 'adt':0.5}

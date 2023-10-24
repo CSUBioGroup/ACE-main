@@ -7,7 +7,7 @@ Run:
 python ACE_covid19.py
 ```
 
-`./checkpoints` folder contains the pretrained model weights, inputs and outputs of ACE in this task. Due to the limitation of file size, we have uploaded the complete data onto [`zenodo`]()
+`./checkpoints` folder contains the pretrained model weights, inputs and outputs of ACE in this task. Due to the limitation of file size, we have uploaded the complete data onto [`zenodo`](https://zenodo.org/records/10035793)
 
 `prepare_CITE2_dataset.R` exports inputs from the bridge dataset.
 

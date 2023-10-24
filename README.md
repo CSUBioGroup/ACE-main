@@ -29,7 +29,7 @@ setup
 `python setup.py install`
 
 ## Datasets
-All datasets used in our paper can be found in [`zenodo`](). We provided the data used by our [`demo1`](./notebooks/demo_integration.ipynb) and [`demo2`](./notebooks/demo_imputation.ipynb) in the [`data/demo_data`](./data/demo_data) folder.
+All datasets used in our paper can be found in [`zenodo`](https://zenodo.org/records/10035793). We provided the data used by our [`demo1`](./notebooks/demo_integration.ipynb) and [`demo2`](./notebooks/demo_imputation.ipynb) in the [`data/demo_data`](./data/demo_data) folder.
 
 ## Tutorials
 In the [`notebooks`](./notebooks) folder, we provided notebooks to reproduce ACE's results in our manuscript.

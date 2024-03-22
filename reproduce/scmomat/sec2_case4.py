@@ -12,9 +12,7 @@ import scipy.io as sio
 from os.path import join
 
 import scmomat 
-import sys
-sys.path.insert(0, '/home/yanxh/gitrepo/multi-omics-matching/ACE/reproduce/evaluation')
-from evaluation import eval_mosaic, eval_bridge, print_results, eval_lisi, eval_clustering
+from evaluation import eval_mosaic, eval_specific_mod, eval_bridge, print_results, eval_asw, eval_lisi, eval_clustering
 from evaluation import eval_bridge_above2
 
 plt.rcParams["font.size"] = 10
@@ -37,6 +35,10 @@ meta_data = meta_data[['stim', 'predicted.celltype.l1', 'predicted.celltype.l2']
 # train_idx = np.where((meta_data.stim=='Control').to_numpy())[0]
 test_idx  = np.where((meta_data.stim=='Stim').to_numpy())[0]
 
+
+NMI1, ARI1, MOD_LISI1, BATCH_LISI1, FOSCTTM1, MS1 = [], [], [], [], [], []
+NMI2, ARI2, MOD_LISI2, BATCH_LISI2, FOSCTTM2, MS2 = [], [], [], [], [], []
+INDS = []
 for p in [0.1, 0.2, 0.4, 0.8]:
     for repeat in range(3):
         new_train_idx = np.load(f'/home/yanxh/gitrepo/multi-omics-matching/Senst_exp_inputs/case4/dogma/p={p}_r={repeat}_new_train_idx.npy')
@@ -115,10 +117,10 @@ for p in [0.1, 0.2, 0.4, 0.8]:
 
         zs = model.extract_cell_factors()
 
-        n_neighbors = 100
-        r = None
-        resolution = 0.9
-        knn_indices, knn_dists = scmomat.calc_post_graph(zs, n_neighbors, njobs = 8, r = r)
+#         n_neighbors = 100
+#         r = None
+#         resolution = 0.9
+#         knn_indices, knn_dists = scmomat.calc_post_graph(zs, n_neighbors, njobs = 8, r = r)
 
         ad_mosaic = sc.AnnData(np.vstack(zs), obsm={"X_emb":np.vstack(zs)})
         ad_mosaic.obs['batch'] = np.hstack(batches)
@@ -126,21 +128,55 @@ for p in [0.1, 0.2, 0.4, 0.8]:
         ad_mosaic.obs['cell_type'] = np.hstack(labels)
         ad_mosaic.obs['mod-batch'] = (ad_mosaic.obs['mod'] + '-' + ad_mosaic.obs.batch).to_numpy()
 
-        ad_mosaic.obsp['connectivities'] = scmomat.utils._compute_connectivities_umap(
-            knn_indices = knn_indices, knn_dists = knn_dists, 
-            n_neighbors = 15, set_op_mix_ratio=1.0, local_connectivity=1.0
-        )
-        ad_mosaic.uns['neighbors'] = {'connectivities_key':'connectivities'}
+#         ad_mosaic.obsp['connectivities'] = scmomat.utils._compute_connectivities_umap(
+#             knn_indices = knn_indices, knn_dists = knn_dists, 
+#             n_neighbors = 15, set_op_mix_ratio=1.0, local_connectivity=1.0
+#         )
+#         ad_mosaic.uns['neighbors'] = {'connectivities_key':'connectivities'}
 
         print('=========================')
         print(f'p={p}, repeat={repeat}')
         print('=========================')
+        
+        ##############
+        # before harmony
         # mosaic eval
         r = eval_mosaic(ad_mosaic, label_key='cell_type', batch_keys=['mod-batch'], use_rep='X_emb', 
-            use_lisi=True, use_neighbors=True, use_nmi=False, use_gc=False)  # mod-lisi = batch_lisi
+            use_lisi=True, use_neighbors=False, use_nmi=False, use_gc=False)  # mod-lisi = batch_lisi
+        MOD_LISI1.append(r['mod-batch_LISI'])
 
         # nmi, ari using nmi search
         nmi, ari = eval_clustering(
-            ad_mosaic, label_key='cell_type', cluster_key='cluster', resolutions=None, use_rep='X_emb', use_neighbors=True,
+            ad_mosaic, label_key='cell_type', cluster_key='cluster', resolutions=None, use_rep='X_emb', use_neighbors=False,
             use='nmi', nmi_method='arithmetic')
         print('nmi={:.4f}, ari={:.4f}'.format(nmi, ari))
+        NMI1.append(nmi)
+        ARI1.append(ari)
+        
+        ##############
+        # after harmony
+        from preprocessing import harmony
+        ad_mosaic_df = pd.DataFrame(ad_mosaic.obsm['X_emb'], index=ad_mosaic.obs_names)
+        ad_mosaic_df['batch'] = ad_mosaic.obs['mod-batch'].to_numpy()
+        ad_mosaic.obsm['X_emb_harmony'] = harmony([ad_mosaic_df])[0]
+        
+        r = eval_mosaic(ad_mosaic, label_key='cell_type', batch_keys=['mod-batch'], 
+            use_lisi=True, use_rep='X_emb_harmony', use_neighbors=False, use_gc=False, use_nmi=False)  # mod-lisi = batch_lisi
+        MOD_LISI2.append(r['mod-batch_LISI'])
+
+        nmi, ari = eval_clustering(
+            ad_mosaic, label_key='cell_type', cluster_key='cluster', resolutions=None, use_rep='X_emb_harmony', use_neighbors=False,
+            use='nmi', nmi_method='arithmetic')
+        print("nmi={:.4f}, ari={:.4f}".format(nmi, ari))
+        NMI2.append(nmi)
+        ARI2.append(ari)
+        
+        INDS.append(f'p={p}-r={repeat}')
+        
+df_be = pd.DataFrame({'nmi':NMI1, 'ari':ARI1, 'mod-lisi':MOD_LISI1, 'batch-lisi':MOD_LISI1}, index=INDS)
+df_af = pd.DataFrame({'nmi':NMI2, 'ari':ARI2, 'mod-lisi':MOD_LISI2, 'batch-lisi':MOD_LISI2}, index=INDS)
+df_be.to_csv('/home/yanxh/gitrepo/multi-omics-matching/Visualization/outputs/case4/dogma/case4_dogma_scmomat.csv', index=True)
+df_af.to_csv('/home/yanxh/gitrepo/multi-omics-matching/Visualization/outputs/case4/dogma/case4_dogma_scmomat_harmony.csv', index=True)
+                      
+
+        

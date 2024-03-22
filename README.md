@@ -1,5 +1,5 @@
 # ACE
-ACE enhances representation of cellular heterogeneity and imputes missing molecular layers by mosaic integration.
+A versatile contrastive learning framework for mosaic integration. ACE assembles two types of outputs: <b>ACE-align</b> and <b>ACE-spec</b>. In our code, we divide them into two sequential stages: <b>ACE-align</b> corresponds to the first training stage and <b>ACE-spec</b> corresponds to the second training stage.   
 
 ## Installation
 clone repository
@@ -29,16 +29,16 @@ setup
 `python setup.py install`
 
 ## Datasets
-All datasets used in our paper can be found in [`zenodo`](https://zenodo.org/records/10035793). We provided the data used by our [`demo1`](./notebooks/demo_integration.ipynb) and [`demo2`](./notebooks/demo_imputation.ipynb) in the [`data/demo_data`](./data/demo_data) folder.
+All datasets used in our paper can be found in [`zenodo`](https://zenodo.org/records/10851161). We provided the data used by our [`demo1`](./notebooks/demo_integration.ipynb) and [`demo2`](./notebooks/demo_imputation.ipynb) in the [`data/demo_data`](./data/demo_data) folder.
 
 ## Tutorials
 In the [`notebooks`](./notebooks) folder, we provided notebooks to reproduce ACE's results in our manuscript.
 
 [`sec1_sec2_integration`](./notebooks/sec1_sec2_integration) reproduced ACE's results in bimodal and trimodal integration benchmark.
 
-[`sec3_imputation`](./notebooks/sec3_imputation) reproduced results in feature imputation. 
+[`sec3_imputation`](./notebooks/sec3_imputation) reproduced results in feature reconstruction experiment. 
 
-[`sec4_CITE-ASAP_refinement`](./notebooks/sec4_CITE-ASAP_refinement) reproduced experiments of annotation refinement analysis on CITE-ASAP dataset. 
+[`sec4_CITE-ASAP_refinement`](./notebooks/sec4_CITE-ASAP_refinement) reproduced annotation refinement analysis on CITE-ASAP dataset. 
 
 [`sec5_COVID-19`](./notebooks/sec5_COVID-19) reproduced experiments on COVID-19 related datasets.
 

@@ -14,13 +14,13 @@ from os.path import join
 
 import scmomat 
 import sys
-sys.path.insert(0, '/home/yanxh/gitrepo/multi-omics-matching/ACE/reproduce/evaluation')
-from evaluation import eval_mosaic, eval_bridge, print_results, eval_lisi, eval_clustering
+sys.path.insert(0, '.')
+from evaluation import eval_mosaic, eval_specific_mod, eval_bridge, print_results, eval_asw, eval_lisi, eval_clustering
 
 
 plt.rcParams["font.size"] = 10
 
-dat_dir = "/home/yanxh/gitrepo/multi-omics-matching/neurips2021_multimodal_topmethods-main/output/datasets/"
+dat_dir = "/media/asus/data16t/xuhua/gitrepo/multi-omics-matching/neurips2021_multimodal_topmethods-main/output/datasets/"
 data_dir = os.path.join(dat_dir, "match_modality/openproblems_bmmc_cite_phase2_mod2")
 input_dir ='/home/yanxh/gitrepo/multi-omics-matching/Senst_exp_inputs/case4/cite'
 
@@ -44,14 +44,19 @@ input_train_mod2_0.obs_names = input_train_mod1_0.obs_names
 test_ord = input_test_sol.X.tocsr().indices
 assert (test_ord == np.argsort(input_test_sol.uns['pairing_ix'])).all()
 
-meta_dir = '/home/yanxh/gitrepo/multi-omics-matching/neurips2021_multimodal_topmethods-main'
+meta_dir = "/media/asus/data16t/xuhua/gitrepo/multi-omics-matching/neurips2021_multimodal_topmethods-main/"
 df_meta = pd.read_csv(os.path.join(meta_dir, 'output/datasets/cite_meta.csv'), index_col=0)
 input_test_mod1_0.obs['cell_type'] = df_meta.loc[input_test_mod1_0.obs_names, 'cell_type'].to_numpy()
 input_test_mod2_0.obs['cell_type'] = input_test_mod1_0.obs.cell_type[np.argsort(test_ord)].to_numpy()
 assert np.all(input_test_mod1_0.obs.cell_type.to_numpy() == input_test_mod2_0.obs.cell_type.to_numpy()[test_ord])
 
+NMI1, ARI1, MOD_LISI1, BATCH_LISI1, FOSCTTM1, MS1 = [], [], [], [], [], []
+NMI2, ARI2, MOD_LISI2, BATCH_LISI2, FOSCTTM2, MS2 = [], [], [], [], [], []
+INDS = []
 for p in [0.1, 0.2, 0.4, 0.8]:
     for repeat in range(3):
+        if not os.path.exists(join(input_dir, f'p={p}_r={repeat}_new_train_idx.npy')):
+            break
         
         new_train_idx = np.load(join(input_dir, f'p={p}_r={repeat}_new_train_idx.npy'))
         test_rna_idx = np.load(join(input_dir, f'p={p}_r={repeat}_test_rna_idx.npy'))
@@ -155,10 +160,10 @@ for p in [0.1, 0.2, 0.4, 0.8]:
 
         zs = model.extract_cell_factors()
 
-        n_neighbors = 100
-        r = None
-        resolution = 0.9
-        knn_indices, knn_dists = scmomat.calc_post_graph(zs, n_neighbors, njobs = 8, r = r)
+#         n_neighbors = 100
+#         r = None
+#         resolution = 0.9
+#         knn_indices, knn_dists = scmomat.calc_post_graph(zs, n_neighbors, njobs = 8, r = r)
 
         ### evaluation
         ad_mosaic = sc.AnnData(np.vstack(zs), obsm={"X_emb":np.vstack(zs)})
@@ -167,14 +172,14 @@ for p in [0.1, 0.2, 0.4, 0.8]:
         ad_mosaic.obs['mod-batch'] = (ad_mosaic.obs['mod'] + '-' + ad_mosaic.obs.batch).to_numpy()
         ad_mosaic.obs['cell_type'] = np.hstack(labels)
 
-        ad_mosaic.obsp['connectivities'] = scmomat.utils._compute_connectivities_umap(
-            knn_indices = knn_indices, knn_dists = knn_dists, 
-            n_neighbors = 15, set_op_mix_ratio=1.0, local_connectivity=1.0
-        )
-        ad_mosaic.uns['neighbors'] = {'connectivities_key':'connectivities'}
+#         ad_mosaic.obsp['connectivities'] = scmomat.utils._compute_connectivities_umap(
+#             knn_indices = knn_indices, knn_dists = knn_dists, 
+#             n_neighbors = 15, set_op_mix_ratio=1.0, local_connectivity=1.0
+#         )
+#         ad_mosaic.uns['neighbors'] = {'connectivities_key':'connectivities'}
 
         # ======================================
-        # evaluation
+        # before harmony
         # ======================================
         print('================================')
         print(f'p={p}, repeat={repeat}')
@@ -182,9 +187,44 @@ for p in [0.1, 0.2, 0.4, 0.8]:
 
         # mosaic eval
         r = eval_mosaic(ad_mosaic, label_key='cell_type', batch_keys=['mod-batch', 'mod'], 
-                        use_lisi=True, use_gc=False, use_nmi=False, use_rep='X_emb', use_neighbors=True)
+                        use_lisi=True, use_gc=False, use_nmi=False, use_rep='X_emb', use_neighbors=False)
+        MOD_LISI1.append(r['mod_LISI'])
+        BATCH_LISI1.append(r['mod-batch_LISI'])
+        
         # nmi, ari using nmi search
         nmi, ari = eval_clustering(
-            ad_mosaic, label_key='cell_type', cluster_key='cluster', resolutions=None, use_rep='X_emb', use_neighbors=True,
+            ad_mosaic, label_key='cell_type', cluster_key='cluster', resolutions=None, use_rep='X_emb', use_neighbors=False,
             use='nmi', nmi_method='arithmetic')
         print('nmi={:.4f}, ari={:.4f}'.format(nmi, ari))
+        NMI1.append(nmi)
+        ARI1.append(ari)
+        
+        ## ================
+        #  After harmony
+        ## ================
+        from preprocessing import harmony
+        ad_mosaic_df = pd.DataFrame(ad_mosaic.obsm['X_emb'], index=ad_mosaic.obs_names)
+        ad_mosaic_df['batch'] = ad_mosaic.obs['mod-batch'].to_numpy()
+        ad_mosaic.obsm['X_emb_harmony'] = harmony([ad_mosaic_df])[0]
+        
+        r = eval_mosaic(ad_mosaic, label_key='cell_type', batch_keys=['mod-batch', 'mod'], 
+            use_lisi=True, use_rep='X_emb_harmony', use_neighbors=False, use_gc=False, use_nmi=False)  # mod-lisi = batch_lisi
+        MOD_LISI2.append(r['mod_LISI'])
+        BATCH_LISI2.append(r['mod-batch_LISI'])
+
+        nmi, ari = eval_clustering(
+            ad_mosaic, label_key='cell_type', cluster_key='cluster', resolutions=None, use_rep='X_emb_harmony', use_neighbors=False,
+            use='nmi', nmi_method='arithmetic')
+        print("nmi={:.4f}, ari={:.4f}".format(nmi, ari))
+        NMI2.append(nmi)
+        ARI2.append(ari)
+        
+        INDS.append(f'p={p}-r={repeat}')
+        
+df_be = pd.DataFrame({'nmi':NMI1, 'ari':ARI1, 'mod-lisi':MOD_LISI1, 'batch-lisi':BATCH_LISI1}, index=INDS)
+df_af = pd.DataFrame({'nmi':NMI2, 'ari':ARI2, 'mod-lisi':MOD_LISI2, 'batch-lisi':BATCH_LISI2}, index=INDS)
+df_be.to_csv('/home/yanxh/gitrepo/multi-omics-matching/Visualization/outputs/case4/cite/case4_scmomat.csv', index=True)
+df_af.to_csv('/home/yanxh/gitrepo/multi-omics-matching/Visualization/outputs/case4/cite/case4_scmomat_harmony.csv', index=True)
+                      
+
+        

@@ -13,7 +13,10 @@ import scipy.io as sio
 from os.path import join
 
 import scmomat 
+
 import sys
+sys.path.insert(0, '.')
+from evaluation import eval_mosaic, eval_specific_mod, eval_bridge, print_results, eval_asw, eval_lisi, eval_clustering
 
 plt.rcParams["font.size"] = 10
 
@@ -24,6 +27,13 @@ print('Reading `mtx` files...')
 _path = '/home/sda1/yanxh/data/seurat-CITE-reference/cite.h5'
 with h5py.File(_path, 'r') as f:
     cell_names = np.array(f['cellID'], dtype='S32').astype('str')
+#     rna_norm_data = sps.csc_matrix(
+#             (np.array(f['RNA.data'], dtype=np.float32), 
+#              np.array(f['RNA.indices'], dtype=np.int32),
+#              np.array(f['RNA.indptr'], dtype=np.int32)
+#             ), 
+#             shape = np.array(f['RNA.shape'], dtype=np.int32)
+#     ).tocsc().astype(np.float32).T#.toarray()
     rna_count_data = sps.csc_matrix(
             (np.array(f['RNA.count.data'], dtype=np.float32), 
              np.array(f['RNA.count.indices'], dtype=np.int32),
@@ -60,8 +70,7 @@ ad_cite.obs['batch'] = ad_cite.obs.donor + '-' + ad_cite.obs.time
 
 ad_cite.obsm['adt'] = adt_count_data
 
-# post-processing step takes too much memory, rate>=0.8 => memory overflow
-for rate in [0.01, 0.1, 0.2, 0.4, 0.8, 1.0]:   # [0.01, 0.1, 0.2, 0.4, 0.8, 1.0]
+for rate in [1.0]:   # [0.01, 0.1, 0.2, 0.4, 0.8, 1.0]
     smp_names = pd.read_csv(join(data_dir2, f'names_{rate}.csv'))['0'].values
     n_smp = len(smp_names)
     n_interval = n_smp // 3
@@ -125,16 +134,16 @@ for rate in [0.01, 0.1, 0.2, 0.4, 0.8, 1.0]:   # [0.01, 0.1, 0.2, 0.4, 0.8, 1.0]
     # post-processing
     zs = model.extract_cell_factors()
 
-    n_neighbors = 100
-    r = None
-    resolution = 0.9
-    knn_indices, knn_dists = scmomat.calc_post_graph(zs, n_neighbors, njobs = 8, r = r)
-    # labels_leiden = scmomat.leiden_cluster(X = None, knn_indices = knn_indices, knn_dists = knn_dists, resolution = resolution)
+#     n_neighbors = 100
+#     r = None
+#     resolution = 0.9
+#     knn_indices, knn_dists = scmomat.calc_post_graph(zs, n_neighbors, njobs = 8, r = r)
+#     # labels_leiden = scmomat.leiden_cluster(X = None, knn_indices = knn_indices, knn_dists = knn_dists, resolution = resolution)
 
-    _ = scmomat.utils._compute_connectivities_umap(
-        knn_indices = knn_indices, knn_dists = knn_dists, 
-        n_neighbors = 15, set_op_mix_ratio=1.0, local_connectivity=1.0
-    )
+#     _ = scmomat.utils._compute_connectivities_umap(
+#         knn_indices = knn_indices, knn_dists = knn_dists, 
+#         n_neighbors = 15, set_op_mix_ratio=1.0, local_connectivity=1.0
+#     )
     
     end_time = datetime.datetime.now()
     print('===============================================')
